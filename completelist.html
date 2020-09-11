@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #testimonial{
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+        }
+        img{
+            width: 4cm;
+            margin: auto;
+        }
+        .testimonial-content{
+            margin: 1em;
+        padding: 1em;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+<body>
+    <div id="testimonial">
+
+    </div>
+    
+</body>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyB2MAuoYNwlnfE7D3DUFF0ksTq52inDdmY",
+      authDomain: "samchikitsa-8ae9a.firebaseapp.com",
+      databaseURL: "https://samchikitsa-8ae9a.firebaseio.com",
+      projectId: "samchikitsa-8ae9a",
+      storageBucket: "samchikitsa-8ae9a.appspot.com",
+      messagingSenderId: "151461880341",
+      appId: "1:151461880341:web:3a6fbdaa6d75229d9ee41c",
+      measurementId: "G-XGTMGR77Z4"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  
+    const auth = firebase.auth();
+const db = firebase.firestore();
+
+
+var dbRef = firebase.firestore();
+            dbRef.collection('doctors_additional_info').get().then((snapshot) =>{
+                snapshot.docs.forEach(doc => {
+                    var fees = doc.data().charges;
+                    var city = doc.data().city;
+                    var pincode = doc.data().pincode;
+                    var address = doc.data().clinic_address;
+                    const name = doc.data().name;
+                    const regd_no = doc.data().Regd_no;
+                    const exp = doc.data().exp;
+                    const qualification = doc.data().qualification;
+                    const profilePhoto = doc.data().profilePhoto;
+                    var phone = doc.data().phone;
+                    var email = doc.data().email;
+                    var dob = doc.data().dob;
+                    var college = doc.data().college;
+                    var year_of_comp = doc.data().Year_of_completion;
+                    var reg_council = doc.data().reg_council;
+                    var certificate = doc.data().certificate;
+                    document.getElementById("testimonial").innerHTML += '<div class="testimonial-content"><div class=" user-content"><div class="testimonial-img"><img src="'+profilePhoto+'" alt=" Doctors photo"></div><div class="detail"><b> Doctor Name: '+name+'</b><br><b> Contact: '+phone+'</b><br><b> Email: '+email+'</b><br><b> Date Of Birth: '+dob+'</b><br><b>Qualification: '+qualification+' </b><br><b> Registration No. : '+regd_no+'</b><br><b> Registration Council : '+reg_council+'</b><br><b> experience : '+exp+' years</b><br><b> City : '+city+'</b><br><b>Clinic Address : '+address+' </b><br><b> pincode : '+pincode+'</b><br></p><a href='+certificate+'>Certificate of proof</a><br></div>'
+                })
+            })
+
+</script>
+</html>
